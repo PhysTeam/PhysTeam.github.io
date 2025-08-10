@@ -3,906 +3,1006 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhysTeam - Научные эксперименты для школьников</title>
+    <title>Physics Universe - Исследуй мир физики</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        .hi {
-            color: #adadffff;
-        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --primary: #4a00e0;
+            --secondary: #8e2de2;
+            --accent: #00c6ff;
+            --dark: #121212;
+            --light: #f5f5f7;
+            --card-bg: rgba(30, 30, 46, 0.7);
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Exo 2', sans-serif;
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: var(--light);
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-attachment: fixed;
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            overflow-x: hidden;
         }
-        
+
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        
+
+        /* Particle background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
         .container {
-            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
+        /* Header Styles */
         header {
-            background: rgba(10, 20, 40, 0.9);
             padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 100;
         }
-        
-        .header-content {
+
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 15px 0;
         }
-        
+
         .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 15px;
         }
-        
-        .logo-icon {
+
+        .logo i {
+            margin-right: 10px;
             font-size: 2.5rem;
-            color: #4fc3f7;
-            animation: pulse 2s infinite;
         }
-        
-        .logo-text {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 2rem;
-            color: white;
-            text-shadow: 0 0 10px rgba(79, 195, 247, 0.7);
-        }
-        
-        .logo-text span {
-            color: #4fc3f7;
-        }
-        
-        nav ul {
+
+        .nav-links {
             display: flex;
             list-style: none;
-            gap: 30px;
         }
-        
-        nav a {
-            color: white;
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--light);
             text-decoration: none;
             font-size: 1.1rem;
-            font-weight: 500;
-            padding: 8px 15px;
-            border-radius: 30px;
-            transition: all 0.3s ease;
+            font-weight: 300;
             position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
         }
-        
-        nav a:hover {
-            background: rgba(79, 195, 247, 0.2);
-            color: #4fc3f7;
+
+        .nav-links a:hover {
+            color: var(--accent);
         }
-        
-        nav a::after {
+
+        .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
-            height: 3px;
-            background: #4fc3f7;
-            border-radius: 3px;
+            height: 2px;
+            background: var(--accent);
             transition: width 0.3s ease;
         }
-        
-        nav a:hover::after {
+
+        .nav-links a:hover::after {
             width: 100%;
         }
-        
+
+        /* Hero Section */
         .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            padding: 60px 0;
-            color: white;
+            padding: 100px 0 60px;
             text-align: center;
             position: relative;
-            overflow: hidden;
         }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, transparent 60%, rgba(0, 0, 0, 0.7) 100%);
-            z-index: 1;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
+
         .hero h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 800;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
             margin-bottom: 20px;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            animation: fadeInDown 1s ease;
+            background: linear-gradient(to right, var(--accent), #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 198, 255, 0.3);
         }
-        
-        .hero h1 span {
-            color: #4fc3f7;
-            display: block;
-        }
-        
+
         .hero p {
-            font-size: 1.4rem;
-            margin-bottom: 35px;
+            font-size: 1.5rem;
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 1s ease 0.2s both;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.9);
         }
-        
+
         .cta-button {
             display: inline-block;
-            background: linear-gradient(45deg, #4fc3f7, #29b6f6);
-            color: white;
             padding: 15px 40px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
             font-size: 1.2rem;
             font-weight: 600;
             text-decoration: none;
             border-radius: 50px;
             margin: 10px;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(41, 182, 246, 0.4);
-            animation: pulse 2s infinite;
+            box-shadow: 0 5px 15px rgba(142, 45, 226, 0.4);
+            border: none;
+            cursor: pointer;
         }
-        
+
         .cta-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(41, 182, 246, 0.6);
+            box-shadow: 0 10px 25px rgba(142, 45, 226, 0.6);
         }
-        
+
         .cta-button.secondary {
             background: transparent;
-            border: 2px solid #4fc3f7;
-            box-shadow: none;
+            border: 2px solid var(--accent);
         }
-        
+
         .cta-button.secondary:hover {
-            background: rgba(79, 195, 247, 0.1);
+            background: rgba(0, 198, 255, 0.1);
         }
-        
-        section {
-            padding: 100px 0;
+
+        /* Physics Branches */
+        .branches {
+            padding: 80px 0;
         }
-        
+
         .section-title {
             text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
             margin-bottom: 60px;
-        }
-        
-        .section-title h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.8rem;
-            color: white;
-            margin-bottom: 20px;
             position: relative;
-            display: inline-block;
         }
-        
-        .section-title h2::after {
+
+        .section-title::after {
             content: '';
             position: absolute;
             bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
+            width: 100px;
             height: 4px;
-            background: #4fc3f7;
+            background: linear-gradient(to right, var(--primary), var(--accent));
             border-radius: 2px;
         }
-        
-        .section-title p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 30px auto 0;
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
-        
-        .about-content {
+
+        .branch-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .branch-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 35px rgba(142, 45, 226, 0.4);
+        }
+
+        .card-header {
+            padding: 25px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .card-header h3 {
+            font-size: 1.8rem;
+            margin: 0;
             display: flex;
             align-items: center;
-            gap: 50px;
-            margin-top: 50px;
         }
-        
-        .about-text {
-            flex: 1;
-            color: white;
+
+        .card-header i {
+            margin-right: 15px;
+            font-size: 1.8rem;
         }
-        
-        .about-text h3 {
-            font-size: 2rem;
-            margin-bottom: 25px;
-            color: #4fc3f7;
+
+        .card-body {
+            padding: 25px;
         }
-        
-        .about-text p {
+
+        .card-body p {
             margin-bottom: 20px;
-            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
         }
-        
-        .about-image {
-            flex: 1;
-            border-radius: 20px;
+
+        .learn-more {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .learn-more i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .learn-more:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Physics Simulation */
+        .simulation {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .sim-container {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin: 30px auto;
+            background: rgba(10, 10, 20, 0.7);
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #physicsCanvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .control-group {
+            text-align: left;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .value-display {
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        /* Famous Physicists */
+        .physicists {
+            padding: 80px 0;
+        }
+
+        .physicist-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .physicist-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .physicist-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .physicist-img {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .physicist-info {
+            padding: 25px;
+        }
+
+        .physicist-info h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .physicist-info p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+        }
+
+        /* Formulas */
+        .formulas {
+            padding: 80px 0;
+            background: rgba(10, 10, 25, 0.5);
+            margin: 80px 0;
             position: relative;
         }
-        
-        .about-image::before {
+
+        .formulas::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, rgba(26, 42, 108, 0.7), rgba(79, 195, 247, 0.4));
-            z-index: 1;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDBweCIgdmlld0JveD0iMCAwIDEyODAgMTQwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIGZpbGw9IiMwMDAzMDkiPjxwYXRoIGQ9Ik0xMjgwIDE0MFYwSDB2MTQwYzIxLjMzIDAgNjQgMCAxMjgwIDB6IiBmaWxsLW9wYWNpdHk9Ii4zIi8+PC9nPjwvc3ZnPg==') bottom center no-repeat;
+            background-size: 100% 100px;
         }
-        
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .experiments {
-            background: rgba(10, 20, 40, 0.7);
-            padding: 100px 0;
-            border-radius: 40px 40px 0 0;
-            margin-top: -50px;
-            position: relative;
-            z-index: 10;
-        }
-        
-        .experiments-grid {
+
+        .formula-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .experiment-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .experiment-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 15px 40px rgba(79, 195, 247, 0.4);
-        }
-        
-        .experiment-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .experiment-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .experiment-card:hover .experiment-image img {
-            transform: scale(1.1);
-        }
-        
-        .experiment-content {
-            padding: 25px;
-        }
-        
-        .experiment-content h3 {
-            color: #4fc3f7;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .experiment-content p {
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 20px;
-        }
-        
-        .experiment-meta {
-            display: flex;
-            justify-content: space-between;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 15px;
-            margin-top: 15px;
-        }
-        
-        .join {
-            text-align: center;
-        }
-        
-        .join-steps {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
             gap: 40px;
-            margin-top: 60px;
         }
-        
-        .step-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 40px 25px;
-            width: 250px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(79, 195, 247, 0.3);
-        }
-        
-        .step-card:hover {
-            transform: translateY(-10px);
-            background: rgba(79, 195, 247, 0.1);
-            border-color: #4fc3f7;
-            box-shadow: 0 10px 30px rgba(79, 195, 247, 0.2);
-        }
-        
-        .step-number {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3rem;
-            font-weight: 800;
-            color: rgba(79, 195, 247, 0.3);
-            margin-bottom: 20px;
-        }
-        
-        .step-card h3 {
-            color: #4fc3f7;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .step-card p {
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .testimonials {
-            background: rgba(10, 20, 40, 0.7);
-            padding: 100px 0;
-            border-radius: 0 0 40px 40px;
-        }
-        
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .testimonial-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
+
+        .formula-card {
+            background: rgba(30, 30, 46, 0.8);
+            border-radius: 15px;
             padding: 30px;
-            position: relative;
-            border: 1px solid rgba(79, 195, 247, 0.2);
-        }
-        
-        .testimonial-card::before {
-            content: '"';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 5rem;
-            color: rgba(79, 195, 247, 0.1);
-            line-height: 1;
-        }
-        
-        .testimonial-content {
-            margin-top: 30px;
-            color: rgba(255, 255, 255, 0.9);
-            font-style: italic;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            margin-top: 20px;
-            gap: 15px;
-        }
-        
-        .author-image {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid #4fc3f7;
-        }
-        
-        .author-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .author-info h4 {
-            color: #4fc3f7;
-            font-size: 1.2rem;
-        }
-        
-        .author-info p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-        }
-        
-        .contact {
-            padding: 100px 0;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(74, 0, 224, 0.3);
         }
-        
-        .contact-form {
-            max-width: 600px;
-            margin: 50px auto 0;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(79, 195, 247, 0.3);
+
+        .formula {
+            font-size: 2.5rem;
+            margin: 20px 0;
+            color: var(--accent);
+            font-family: 'Times New Roman', serif;
         }
-        
-        .form-group {
-            margin-bottom: 25px;
-            text-align: left;
+
+        .formula-desc {
+            color: rgba(255, 255, 255, 0.85);
         }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #4fc3f7;
-            font-weight: 500;
-        }
-        
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #4fc3f7;
-            background: rgba(79, 195, 247, 0.05);
-        }
-        
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
+
+        /* Footer */
         footer {
-            background: rgba(5, 10, 20, 0.95);
-            padding: 50px 0 20px;
-            color: rgba(255, 255, 255, 0.7);
-            text-align: center;
+            padding: 60px 0 30px;
+            background: rgba(10, 10, 20, 0.9);
+            position: relative;
         }
-        
+
         .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
         }
-        
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .footer-section h3 {
-            color: #4fc3f7;
-            margin-bottom: 25px;
+
+        .footer-column h3 {
             font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
         }
-        
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+
         .footer-links {
             list-style: none;
         }
-        
+
         .footer-links li {
             margin-bottom: 12px;
         }
-        
+
         .footer-links a {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: color 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
-        
+
         .footer-links a:hover {
-            color: #4fc3f7;
+            color: var(--accent);
         }
-        
-        .social-icons {
+
+        .social-links {
             display: flex;
             gap: 15px;
-            justify-content: center;
-            margin-top: 15px;
+            margin-top: 20px;
         }
-        
-        .social-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
+
+        .social-links a {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
             color: white;
             transition: all 0.3s ease;
         }
-        
-        .social-icon:hover {
-            background: #4fc3f7;
+
+        .social-links a:hover {
+            background: var(--accent);
             transform: translateY(-5px);
         }
-        
+
         .copyright {
-            padding-top: 20px;
+            text-align: center;
+            padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
         }
-        
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(79, 195, 247, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(79, 195, 247, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(79, 195, 247, 0); }
-        }
-        
-        /* Адаптивность */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-            
-            .about-content {
-                flex-direction: column;
-            }
-        }
-        
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-            }
-            
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             
             .hero p {
                 font-size: 1.2rem;
             }
             
-            .section-title h2 {
-                font-size: 2.3rem;
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 10px 15px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
                 font-size: 2rem;
             }
             
             .cta-button {
                 display: block;
                 margin: 15px auto;
-                width: 90%;
-                max-width: 300px;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
-            
-            .experiments-grid,
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .join-steps {
-                flex-direction: column;
-                align-items: center;
+                width: 80%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Шапка сайта -->
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Header -->
     <header>
         <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-atom"></i>
-                    </div>
-                    <div class="logo-text">Phys<span>Team</span></div>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#about">О нас</a></li>
-                        <li><a href="#experiments">Эксперименты</a></li>
-                        <li><a href="#join">Как присоединиться</a></li>
-                        <li><a href="#contact">Присоединяйтесь</a></li>
-                    </ul>
-                </nav>
-            </div>
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-atom"></i>
+                    PhysicsUniverse
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Разделы</a></li>
+                    <li><a href="#">Формулы</a></li>
+                    <li><a href="#">Учёные</a></li>
+                    <li><a href="#">Эксперименты</a></li>
+                    <li><a href="#">О проекте</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <!-- Герой-секция -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h1>Открой мир <span>физики</span> вместе с нами!</h1>
-                <p>PhysTeam - это команда увлеченных школьников, которые проводят увлекательные физические эксперименты, разгадывают загадки природы и делают науку доступной для каждого!</p>
-                <div>
-                    <a href="#join" class="cta-button">Присоединиться к команде</a>
-                    <a href="#experiments" class="cta-button secondary">Узнать об экспериментах</a>
-                </div>
-            </div>
+            <h1>ИССЛЕДУЙТЕ ФУНДАМЕНТАЛЬНЫЕ ЗАКОНЫ ВСЕЛЕННОЙ</h1>
+            <p>От квантовой механики до теории относительности - погрузитесь в удивительный мир физики с интерактивными симуляциями, формулами и историей великих открытий</p>
+            <a href="#simulation" class="cta-button">ПОПРОБОВАТЬ СИМУЛЯЦИЮ</a>
+            <a href="#branches" class="cta-button secondary">ИЗУЧИТЬ РАЗДЕЛЫ</a>
         </div>
     </section>
 
-    <!-- О нас -->
-    <section id="about" class="about">
+    <!-- Physics Branches -->
+    <section id="branches" class="branches">
         <div class="container">
-            <div class="section-title">
-                <h2>О нашей команде</h2>
-                <p>Мы объединяем школьников, которые хотят познавать мир через практические эксперименты и научные открытия</p>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Наша миссия</h3>
-                    <p>PhysTeam создана для того, чтобы показать школьникам, что физика - это не скучные формулы в учебнике, а увлекательный мир, который можно исследовать своими руками.</p>
-                    <p>Мы проводим эксперименты, которые помогают понять фундаментальные законы природы. От простых опытов с электричеством до сложных измерений космических расстояний - каждый проект это шаг к пониманию того, как устроен наш мир.</p>
-                    <p>Наши участники не только получают знания, но и развивают критическое мышление, учатся работать в команде и презентовать свои открытия.</p>
-                    <a href="#join" class="cta-button">Стать частью команды</a>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Команда PhysTeam за экспериментом">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Эксперименты -->
-    <section id="experiments" class="experiments">
-        <div class="container">
-            <div class="section-title">
-                <h2>Наши эксперименты</h2>
-                <p>Практические исследования, которые мы проводим вместе с участниками команды</p>
-            </div>
-            <div class="experiments-grid">
-                <div class="experiment-card">
-                    <div class="experiment-image">
-                        <img src="https://images.unsplash.com/photo-1505506874110-6a7a69069a08?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=200&q=80" alt="Измерение скорости света">
+            <h2 class="section-title">ОСНОВНЫЕ РАЗДЕЛЫ ФИЗИКИ</h2>
+            <div class="cards-container">
+                <div class="branch-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-meteor"></i> Механика</h3>
                     </div>
-                    <div class="experiment-content">
-                        <h3>Скорость света от Солнца до Земли</h3>
-                        <p>В этом эксперименте мы измеряем время, за которое свет проходит от Солнца до Земли. Используя математические расчеты, участники определяют скорость света и расстояние до Солнца.</p>
-                        <div class="experiment-meta">
-                        </div>
+                    <div class="card-body">
+                        <p>Изучение движения тел под действием сил. Включает кинематику, динамику, статику и гидродинамику.</p>
+                        <a href="#" class="learn-more">Узнать больше <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
-
+                <div class="branch-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-bolt"></i> Электродинамика</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Изучение электромагнитных явлений, электрических и магнитных полей, электромагнитных волн.</p>
+                        <a href="#" class="learn-more">Узнать больше <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="branch-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-lightbulb"></i> Оптика</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Наука о природе света, его свойствах и взаимодействии с веществом. Геометрическая и волновая оптика.</p>
+                        <a href="#" class="learn-more">Узнать больше <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="branch-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-fire"></i> Термодинамика</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Изучение тепловых явлений, превращения энергии, свойств макроскопических систем.</p>
+                        <a href="#" class="learn-more">Узнать больше <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="branch-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-atom"></i> Квантовая физика</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Физика микромира: поведение частиц на атомном и субатомном уровнях, корпускулярно-волновой дуализм.</p>
+                        <a href="#" class="learn-more">Узнать больше <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="branch-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-stars"></i> Астрофизика</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Применение законов физики для объяснения астрономических явлений, изучение небесных тел и Вселенной.</p>
+                        <a href="#" class="learn-more">Узнать больше <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Как присоединиться -->
-    <section id="join" class="join">
+    <!-- Physics Simulation -->
+    <section id="simulation" class="simulation">
         <div class="container">
-            <div class="section-title">
-                <h2>Как присоединиться</h2>
-                <p>Стань частью нашей команды всего за один шаг</p>
-            </div>
-            <div class="join-steps">
-                <div class="step-card">
+            <h2 class="section-title">ИНТЕРАКТИВНАЯ СИМУЛЯЦИЯ</h2>
+            <p>Экспериментируйте с параметрами и наблюдайте за физическими процессами в реальном времени</p>
+            
+            <div class="sim-container">
+                <h3>Движение тела, брошенного под углом к горизонту</h3>
+                <div class="canvas-container">
+                    <canvas id="physicsCanvas"></canvas>
+                </div>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="angle">Угол броска (°):</label>
+                        <input type="range" id="angle" min="10" max="80" value="45">
+                        <div class="value-display" id="angleValue">45°</div>
+                    </div>
                     
-                    <h3>Заполни заявку</h3>
-                    <p>Расскажи немного о себе и своих интересах в физике</p>
+                    <div class="control-group">
+                        <label for="velocity">Начальная скорость (м/с):</label>
+                        <input type="range" id="velocity" min="10" max="50" value="30">
+                        <div class="value-display" id="velocityValue">30 м/с</div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="gravity">Гравитация (м/с²):</label>
+                        <input type="range" id="gravity" min="1" max="20" value="9.8">
+                        <div class="value-display" id="gravityValue">9.8 м/с²</div>
+                    </div>
                 </div>
                 
+                <button id="restartBtn" class="cta-button" style="margin-top: 20px;">
+                    <i class="fas fa-redo"></i> Запустить снова
+                </button>
             </div>
-            <a href="#contact" class="cta-button">Подать заявку сейчас</a>
         </div>
     </section>
 
-   
-    <!-- Присоединение -->
-    <section id="contact" class="contact">
+    <!-- Famous Physicists -->
+    <section class="physicists">
         <div class="container">
-            <div class="section-title">
-                <h2>Присоединяйся к нам!</h2>
-                <p>Заполни форму, и мы свяжемся с тобой в ближайшее время</p>
+            <h2 class="section-title">ВЕЛИКИЕ ФИЗИКИ</h2>
+            <div class="physicist-cards">
+                <div class="physicist-card">
+                    <div class="physicist-img" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url('https://upload.wikimedia.org/wikipedia/commons/d/d4/Albert_Einstein_1947.jpg'); background-size: cover;"></div>
+                    <div class="physicist-info">
+                        <h3>Альберт Эйнштейн</h3>
+                        <p>Теория относительности, фотоэффект, E=mc²</p>
+                        <p>Нобелевская премия по физике (1921)</p>
+                    </div>
+                </div>
+                
+                <div class="physicist-card">
+                    <div class="physicist-img" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url('https://upload.wikimedia.org/wikipedia/commons/6/6e/Niels_Bohr.jpg'); background-size: cover;"></div>
+                    <div class="physicist-info">
+                        <h3>Нильс Бор</h3>
+                        <p>Квантовая механика, модель атома, принцип дополнительности</p>
+                        <p>Нобелевская премия по физике (1922)</p>
+                    </div>
+                </div>
+                
+                <div class="physicist-card">
+                    <div class="physicist-img" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url('https://upload.wikimedia.org/wikipedia/commons/5/55/Marie_Curie_c1920.jpg'); background-size: cover;"></div>
+                    <div class="physicist-info">
+                        <h3>Мария Кюри</h3>
+                        <p>Радиоактивность, открытие полония и радия</p>
+                        <p>Нобелевская премия по физике (1903) и химии (1911)</p>
+                    </div>
+                </div>
             </div>
-                <h2 class = hi>Чтобы попасть в команду напишите Имя, Фамилия, Номер Телефона на почту: physteam@mail.ru.<h2/>
+        </div>
     </section>
 
-    <!-- Подвал -->
+    <!-- Physics Formulas -->
+    <section class="formulas">
+        <div class="container">
+            <h2 class="section-title">ФУНДАМЕНТАЛЬНЫЕ ФОРМУЛЫ</h2>
+            <div class="formula-grid">
+                <div class="formula-card">
+                    <div class="formula">E = mc²</div>
+                    <p class="formula-desc">Эквивалентность массы и энергии - теория относительности Эйнштейна</p>
+                </div>
+                
+                <div class="formula-card">
+                    <div class="formula">F = G · (m₁m₂)/r²</div>
+                    <p class="formula-desc">Закон всемирного тяготения Ньютона</p>
+                </div>
+                
+                <div class="formula-card">
+                    <div class="formula">F = ma</div>
+                    <p class="formula-desc">Второй закон Ньютона - сила равна массе, умноженной на ускорение</p>
+                </div>
+                
+                <div class="formula-card">
+                    <div class="formula">E = hf</div>
+                    <p class="formula-desc">Энергия кванта электромагнитного излучения (формула Планка)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h3>PhysTeam</h3>
-                    <p>Объединяем школьников для исследования мира через физические эксперименты и научные открытия.</p>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-vk"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <div class="footer-column">
+                    <h3>PhysicsUniverse</h3>
+                    <p>Образовательный проект, посвящённый удивительному миру физики. Мы делаем сложные концепции доступными и интересными.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
-                <div class="footer-section">
-                    <h3>Наши эксперименты</h3>
+                <div class="footer-column">
+                    <h3>Разделы</h3>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-lightbulb"></i> Скорость света</a></li>
-                        <li><a href="#"><i class="fas fa-magnet"></i> Электромагнетизм</a></li>
-                        <li><a href="#"><i class="fas fa-weight-hanging"></i> Гравитация</a></li>
-                        <li><a href="#"><i class="fas fa-wind"></i> Аэродинамика</a></li>
-                        <li><a href="#"><i class="fas fa-atom"></i> Ядерная физика</a></li>
+                        <li><a href="#">Классическая механика</a></li>
+                        <li><a href="#">Электромагнетизм</a></li>
+                        <li><a href="#">Термодинамика</a></li>
+                        <li><a href="#">Квантовая физика</a></li>
+                        <li><a href="#">Астрофизика</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-section">
+                <div class="footer-column">
+                    <h3>Ресурсы</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Интерактивные симуляции</a></li>
+                        <li><a href="#">Справочник формул</a></li>
+                        <li><a href="#">История физики</a></li>
+                        <li><a href="#">Биографии учёных</a></li>
+                        <li><a href="#">Эксперименты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
                     <h3>Контакты</h3>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-envelope"></i> physteam@mail.ru</a></li>
-                        <li><a href="#"><i class="fas fa-phone"></i> +7 (906) 096-14-86</a></li>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Москва, ул. Научная, 15</a></li>
-                        <li><a href="#"><i class="fas fa-clock"></i> Пн-Пт: 15:00-19:00</a></li>
+                        <li><i class="fas fa-envelope"></i> info@physicsuniverse.ru</li>
+                        <li><i class="fas fa-phone"></i> +7 (495) 123-45-67</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Москва, Ленинские горы, 1</li>
                     </ul>
                 </div>
             </div>
+            
             <div class="copyright">
-                <p>&copy; 2025 PhysTeam. Все права защищены. Сайт создан с любовью к науке!</p>
+                <p>&copy; 2023 PhysicsUniverse. Все права защищены.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Плавная прокрутка для навигации
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            });
+        // Particles.js Config
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#00c6ff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#8e2de2",
+                    opacity: 0.3,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 140, line_linked: { opacity: 1 } },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Physics Simulation
+        const canvas = document.getElementById('physicsCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+        
+        // Simulation variables
+        let angle = 45;
+        let velocity = 30;
+        let gravity = 9.8;
+        let time = 0;
+        let isRunning = false;
+        let animationId;
+        
+        // DOM Elements
+        const angleSlider = document.getElementById('angle');
+        const velocitySlider = document.getElementById('velocity');
+        const gravitySlider = document.getElementById('gravity');
+        const angleValue = document.getElementById('angleValue');
+        const velocityValue = document.getElementById('velocityValue');
+        const gravityValue = document.getElementById('gravityValue');
+        const restartBtn = document.getElementById('restartBtn');
+        
+        // Event Listeners
+        angleSlider.addEventListener('input', () => {
+            angle = parseInt(angleSlider.value);
+            angleValue.textContent = angle + '°';
+            if (!isRunning) drawProjectile(0);
         });
         
-        // Обработка формы
-        const contactForm = document.querySelector('.contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Здесь будет код для отправки формы
-                alert('Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.');
-                contactForm.reset();
-            });
+        velocitySlider.addEventListener('input', () => {
+            velocity = parseInt(velocitySlider.value);
+            velocityValue.textContent = velocity + ' м/с';
+            if (!isRunning) drawProjectile(0);
+        });
+        
+        gravitySlider.addEventListener('input', () => {
+            gravity = parseFloat(gravitySlider.value);
+            gravityValue.textContent = gravity.toFixed(1) + ' м/с²';
+            if (!isRunning) drawProjectile(0);
+        });
+        
+        restartBtn.addEventListener('click', () => {
+            if (isRunning) {
+                cancelAnimationFrame(animationId);
+                isRunning = false;
+            }
+            time = 0;
+            startSimulation();
+        });
+        
+        // Initialize canvas
+        function initCanvas() {
+            ctx.fillStyle = 'rgba(10, 10, 20, 0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw ground
+            ctx.fillStyle = 'rgba(74, 0, 224, 0.3)';
+            ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
+            
+            // Draw scale
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.beginPath();
+            for (let i = 0; i < canvas.width; i += 50) {
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, canvas.height);
+            }
+            for (let i = 0; i < canvas.height; i += 50) {
+                ctx.moveTo(0, i);
+                ctx.lineTo(canvas.width, i);
+            }
+            ctx.stroke();
         }
         
-        // Анимация при прокрутке
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.step-card, .experiment-card, .testimonial-card');
+        // Draw projectile at specific time
+        function drawProjectile(t) {
+            initCanvas();
             
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if (elementPosition < screenPosition) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }
-            });
-        };
+            // Calculate position
+            const rad = angle * Math.PI / 180;
+            const vx = velocity * Math.cos(rad);
+            const vy = velocity * Math.sin(rad);
+            
+            const x = vx * t;
+            const y = vy * t - 0.5 * gravity * t * t;
+            
+            // Draw trajectory
+            ctx.beginPath();
+            ctx.moveTo(50, canvas.height - 50);
+            for (let i = 0; i <= t * 10; i += 0.1) {
+                const tx = vx * i;
+                const ty = vy * i - 0.5 * gravity * i * i;
+                ctx.lineTo(50 + tx * 5, canvas.height - 50 - ty * 5);
+            }
+            ctx.strokeStyle = '#00c6ff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Draw projectile
+            ctx.beginPath();
+            ctx.arc(50 + x * 5, canvas.height - 50 - y * 5, 8, 0, Math.PI * 2);
+            ctx.fillStyle = '#ff2d75';
+            ctx.fill();
+            
+            // Draw info
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.font = '16px "Exo 2", sans-serif';
+            ctx.fillText(`Время: ${t.toFixed(1)}с`, 20, 30);
+            ctx.fillText(`Высота: ${y > 0 ? y.toFixed(1) : 0}м`, 20, 60);
+            ctx.fillText(`Дистанция: ${x.toFixed(1)}м`, 20, 90);
+        }
         
-        // Начальные стили для анимации
-        document.querySelectorAll('.step-card, .experiment-card, .testimonial-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        // Simulation loop
+        function simulate() {
+            time += 0.05;
+            const rad = angle * Math.PI / 180;
+            const vx = velocity * Math.cos(rad);
+            const vy = velocity * Math.sin(rad);
+            const y = vy * time - 0.5 * gravity * time * time;
+            
+            drawProjectile(time);
+            
+            if (y > 0) {
+                animationId = requestAnimationFrame(simulate);
+            } else {
+                isRunning = false;
+            }
+        }
+        
+        // Start simulation
+        function startSimulation() {
+            isRunning = true;
+            simulate();
+        }
+        
+        // Initial draw
+        initCanvas();
+        drawProjectile(0);
+        
+        // Resize handling
+        window.addEventListener('resize', () => {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+            if (!isRunning) drawProjectile(0);
         });
-        
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 </html>
